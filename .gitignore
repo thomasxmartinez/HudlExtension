@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# secrets and local config
+.env
+.env.*
+.azure/
+
+# logs
+*.log
+npm-debug.log*
+
+# build output
+dist/
+
+# os
+.DS_Store
