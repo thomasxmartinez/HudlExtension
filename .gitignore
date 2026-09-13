@@ -2,9 +2,41 @@
 node_modules/
 
 # secrets and local config
+# .env holds local-only settings during dev. By design M1 stores no account keys
+# or client secrets (managed identity + user delegation SAS), but .env is still
+# the most common accidental leak, so it never gets committed.
 .env
 .env.*
+!.env.example
+
+# credentials, keys, certificates. None should exist in this project, but if one
+# ever lands on disk we want it blocked by default, not by memory.
+*.pem
+*.key
+*.pfx
+*.p12
+id_rsa
+id_ed25519
+
+# Azure local state and deploy profiles
 .azure/
+local.settings.json
+*.PublishSettings
+*.pubxml
+*.pubxml.user
+
+# Bicep parameter files that may carry environment-specific or sensitive values.
+# Commit main.bicep and a sanitized example; keep local-filled params out.
+*.local.bicepparam
+*.parameters.local.json
+
+# game film. Hudl exports are 6 to 9 GB and must never enter git history.
+films/
+*.mp4
+*.mov
+*.m4v
+*.avi
+*.mkv
 
 # logs
 *.log
